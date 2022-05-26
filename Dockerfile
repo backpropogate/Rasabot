@@ -1,17 +1,20 @@
-FROM python:3.8.13 
+# Extend the official Rasa SDK image
+FROM rasa/rasa-sdk:3.1.1
 
-RUN python -m pip install rasa
-
+# Use subdirectory as working directory
 WORKDIR /app
-COPY . .
 
-RUN rasa train nlu
+# Copy any additional custom requirements, if necessary (uncomment next line)
+# COPY actions/requirements-actions.txt ./
 
-#set the user to run, don't run as root
+# Change back to root user to install dependencies
+USER root
+
+# Install extra requirements for actions code, if necessary (uncomment next line)
+# RUN pip install -r requirements-actions.txt
+
+# Copy actions folder to working directory
+COPY ./actions /app/actions
+
+# By best practices, don't run the code with root user
 USER 1001
-
-#set entrypoint for interactive shells
-ENTRYPOINT [ "rasa" ]
-
-#command to run when container is called to run
-CMD [ "run", "--enable-api", "--port", "8080" ]

@@ -1,0 +1,9 @@
+subprocess
+playsound
+requests
+gtts
+sys
+speechRecognition
+logging
+json
+typing

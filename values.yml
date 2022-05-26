@@ -1,0 +1,5 @@
+app:
+    #name of custom action server image to use
+    name: "wil90/rasabot"
+    # tag refers to the custom action server image tag
+    tag: "secondcommit"
